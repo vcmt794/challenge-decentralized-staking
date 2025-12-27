@@ -35,21 +35,19 @@ const Stakings: NextPage = () => {
           <tbody>
             {!stakeEvents || stakeEvents.length === 0 ? (
               <tr>
-                <td colSpan={3} className="text-center">
+                <td colSpan={2} className="text-center">
                   No events found
                 </td>
               </tr>
             ) : (
-              stakeEvents?.map((event, index) => {
-                return (
-                  <tr key={index}>
-                    <td>
-                      <Address address={event.args?.[0]} />
-                    </td>
-                    <td>{formatEther(event.args?.[1] || 0n)} ETH</td>
-                  </tr>
-                );
-              })
+              stakeEvents.map((event, index) => (
+                <tr key={index}>
+                  <td>
+                    <Address address={event.args?.staker} />
+                  </td>
+                  <td>{formatEther(event.args?.amount ?? 0n)} ETH</td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
